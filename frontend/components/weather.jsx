@@ -8,6 +8,7 @@ class Weather extends React.Component {
 
     this._fetchGeoLocation = this._fetchGeoLocation.bind(this);
     this.saveWeather = this.saveWeather.bind(this);
+    this._updateLocation = this._updateLocation.bind(this);
   }
 
   getWeather(){
@@ -84,17 +85,29 @@ class Weather extends React.Component {
   componentDidMount () {
     const that = this;
     this.getStorageWeather((option) => {
-      return option ? "" : that._fetchGeoLocation() ;
+      return option ? that._updateLocation() : that._fetchGeoLocation() ;
     });
     // this._fetchGeoLocation();
   }
 
+  _updateLocation(){
+    const that = this;
+    this.updateInterval = setTimeout(() => {
+      that._fetchGeoLocation();
+      that._updateLocation();
+    }, 60000);
+  }
+
+  componentWillUnmount(){
+
+  }
+
   kToF(kel){
-    return (kel* 9/5 - 459.67);
+    return (Math.round((kel* 9/5 - 459.67) * 100) / 100);
   }
 
   kToC(kel){
-    return (kel- 273.15);
+    return (Math.round((kel- 273.15) * 100)/100 );
   }
 
   render (){
@@ -111,7 +124,7 @@ class Weather extends React.Component {
         </p>);
     } else {
       temp = "Loading";
-      city = 'Loading'
+      city = 'Loading';
     }
     return (
 
