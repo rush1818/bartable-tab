@@ -5,10 +5,13 @@ class Weather extends React.Component {
   constructor(){
     super();
     this.state = {temperatureK: null, city: "Location not provided", latitude: 0, longitude: 0, units: 'F', temperatureF: 'loading', temperatureC: 'loading'};
+
+    this._fetchGeoLocation = this._fetchGeoLocation.bind(this);
+    this.saveWeather = this.saveWeather.bind(this);
   }
 
   getWeather(){
-    let self = this;
+    const self = this;
     var xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange = function() {
@@ -20,7 +23,12 @@ class Weather extends React.Component {
                 city: response.name,
                 temperatureF: self.kToF(kel),
                 temperatureC: self.kToC(kel)});
+
+              setTimeout(()=>{
+                self.saveWeather();
+              }, 2000)
            }
+
            else if (xmlhttp.status == 400) {
               alert('There was an error 400');
            }
@@ -33,7 +41,27 @@ class Weather extends React.Component {
     xmlhttp.send();
   }
 
-  componentDidMount () {
+  saveWeather(){
+    chrome.storage.sync.set({'weatherInfo': {temperatureK: this.state.temperatureK, city: this.state.city,  latitude: this.state.latitude, longitude: this.state.longitude, units: this.state.units, temperatureF: this.state.temperatureF, temperatureC: this.state.temperatureC } }, function() {
+      // Notify that we saved.
+      console.log('Settings saved');
+    });
+  }
+
+  getStorageWeather(callback){
+    const that = this;
+    let option = false;
+    chrome.storage.sync.get('weatherInfo', ({weatherInfo}) => {
+      if (weatherInfo.latitude || weatherInfo.longitude){
+        option = true;
+        // {temperatureK, city, latitude, longitude, units, temperatureF, temperatureC} = weatherInfo;
+        that.setState({temperatureK: weatherInfo.temperatureK, temperatureF: weatherInfo.temperatureF, city: weatherInfo.city});
+      }
+      callback(option);
+    });
+  }
+
+  _fetchGeoLocation(){
     var options = {
       enableHighAccuracy: true,
       timeout: 5000,
@@ -52,6 +80,13 @@ class Weather extends React.Component {
     };
 
     navigator.geolocation.getCurrentPosition(success.bind(this), error, options);
+  }
+  componentDidMount () {
+    const that = this;
+    this.getStorageWeather((option) => {
+      return option ? "" : that._fetchGeoLocation() ;
+    });
+    // this._fetchGeoLocation();
   }
 
   kToF(kel){
