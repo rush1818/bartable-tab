@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Getting started example",
-  "description": "This extension shows a Google Image search result for the current page",
+  "description": "This extension allows to view Bart map/schedules on the new tab page",
   "version": "1.0",
 
   "browser_action": {
@@ -10,8 +10,10 @@
     "default_popup": "popup.html",
     "default_title": "Click here!"
   },
-  "permissions": [
-    "activeTab",
+  "permissions": ["tabs", "storage", "geolocation",
     "https://ajax.googleapis.com/"
-  ]
+  ],
+  "chrome_url_overrides" : {
+    "newtab": "tab.html"
+  }
 }
