@@ -40,17 +40,6 @@ class AllStations extends React.Component {
   render() {
     let content;
     if (Object.keys(this.props.stations).length){
-      // let allLis = Object.keys(this.props.stations).map(key => {
-      //   let currStation = this.props.stations[key];
-      //   return (
-      //     <StationList currStation={currStation} key={currStation.abbr["#text"]} handleClick={this.handleClick(currStation.abbr["#text"])} isSelected={this.state.selectedStation}/>
-      //   );
-      // });
-      // content = (
-      //   <ul className='station-list'>
-      //     {allLis}
-      //   </ul>
-      // );
       content = (
         <Select name='stations' placeholder="Select a station" value={this.state.selectedStation} options={this.options} onChange={this.handleSelect}/>
       )
