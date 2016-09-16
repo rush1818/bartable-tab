@@ -5,7 +5,7 @@ import {requestRTDForStation} from '../../actions/station_actions.js';
 const mapStateToProps = (state, ownProps) => {
     return ({
     realTime: state.realTime,
-    abbr: ownProps.abbr.value
+    abbr: ownProps.abbr ? ownProps.abbr.value : null
   });
 };
 
