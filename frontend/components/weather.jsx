@@ -53,7 +53,7 @@ class Weather extends React.Component {
     const that = this;
     let option = false;
     chrome.storage.sync.get('weatherInfo', ({weatherInfo}) => {
-      if (weatherInfo.latitude || weatherInfo.longitude){
+      if (weatherInfo && ( weatherInfo.latitude || weatherInfo.longitude)){
         option = true;
         // {temperatureK, city, latitude, longitude, units, temperatureF, temperatureC} = weatherInfo;
         that.setState({temperatureK: weatherInfo.temperatureK, temperatureF: weatherInfo.temperatureF, city: weatherInfo.city});
