@@ -4,11 +4,13 @@ import React from 'react';
 class Weather extends React.Component {
   constructor(){
     super();
-    this.state = {temperatureK: null, city: "Location not provided", latitude: 0, longitude: 0, units: 'F', temperatureF: 'loading', temperatureC: 'loading'};
+    this.state = {temperatureK: null, city: "Location not provided", latitude: 0, longitude: 0, unitsF: true, temperatureF: 'loading', temperatureC: 'loading'};
 
     this._fetchGeoLocation = this._fetchGeoLocation.bind(this);
     this.saveWeather = this.saveWeather.bind(this);
     this._updateLocation = this._updateLocation.bind(this);
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   getWeather(){
@@ -43,7 +45,7 @@ class Weather extends React.Component {
   }
 
   saveWeather(){
-    chrome.storage.sync.set({'weatherInfo': {temperatureK: this.state.temperatureK, city: this.state.city,  latitude: this.state.latitude, longitude: this.state.longitude, units: this.state.units, temperatureF: this.state.temperatureF, temperatureC: this.state.temperatureC } }, function() {
+    chrome.storage.sync.set({'weatherInfo': {temperatureK: this.state.temperatureK, city: this.state.city,  latitude: this.state.latitude, longitude: this.state.longitude, unitsF: this.state.unitsF, temperatureF: this.state.temperatureF, temperatureC: this.state.temperatureC } }, function() {
       // Notify that we saved.
       console.log('Settings saved');
     });
@@ -53,10 +55,11 @@ class Weather extends React.Component {
     const that = this;
     let option = false;
     chrome.storage.sync.get('weatherInfo', ({weatherInfo}) => {
-      if (weatherInfo && ( weatherInfo.latitude || weatherInfo.longitude)){
+      if (weatherInfo && weatherInfo.temperatureF && weatherInfo.temperatureC){
         option = true;
-        // {temperatureK, city, latitude, longitude, units, temperatureF, temperatureC} = weatherInfo;
-        that.setState({temperatureK: weatherInfo.temperatureK, temperatureF: weatherInfo.temperatureF, city: weatherInfo.city});
+        that.setState({temperatureK: weatherInfo.temperatureK, temperatureF: weatherInfo.temperatureF, city: weatherInfo.city, temperatureC: weatherInfo.temperatureC, unitsF: weatherInfo.unitsF});
+      } else {
+        console.log('not found');
       }
       callback(option);
     });
@@ -77,7 +80,7 @@ class Weather extends React.Component {
     };
 
     const error = (err) => {
-      console.warn('ERROR(' + err.code + '): ' + err.message);
+      // console.warn('ERROR(' + err.code + '): ' + err.message);
     };
 
     navigator.geolocation.getCurrentPosition(success.bind(this), error, options);
@@ -98,6 +101,18 @@ class Weather extends React.Component {
     }, 60000);
   }
 
+  handleClick(e){
+    const that = this;
+    e.preventDefault();
+    if (that.state.unitsF) {
+      that.setState({unitsF: false});
+    } else {
+      that.setState({unitsF: true});
+    }
+    setTimeout(()=> {
+      that.saveWeather();
+    }, 100);
+  }
   componentWillUnmount(){
 
   }
@@ -113,11 +128,11 @@ class Weather extends React.Component {
   render (){
     let temp, city;
     if (this.state.temperatureK){
-      if (this.state.units === 'F'){
-        temp = (<p>Temperature in F: {this.state.temperatureF}
+      if (this.state.unitsF){
+        temp = (<p onClick={this.handleClick}>Temperature in F: {this.state.temperatureF}
           </p>);
       } else {
-        temp = (<p>Temperature in C: {this.state.temperatureC}
+        temp = (<p onClick={this.handleClick}>Temperature in C: {this.state.temperatureC}
           </p>);
       }
       city = (<p>City: {this.state.city}
