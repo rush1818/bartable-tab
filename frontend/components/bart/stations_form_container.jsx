@@ -1,23 +1,19 @@
 import { connect } from 'react-redux';
-import AllStations from './stations.jsx';
+import StationForm from './stations_form.jsx';
 import {requestAllStations, requestAllStationsStorage} from '../../actions/station_actions.js';
 
 const mapStateToProps = (state, ownProps) => {
     return ({
-    stations: state.stations,
-    type: ownProps.type,
-    selectedStation: ownProps.selectedStation,
-    options: ownProps.options
+    stations: state.stations
   });
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   requestAllStations: (data) => dispatch(requestAllStations(data)),
-  requestAllStationsStorage: (data) => dispatch(requestAllStationsStorage(data)),
-  handleChange: (value) => ownProps.handleChange(value)
+  requestAllStationsStorage: (data) => dispatch(requestAllStationsStorage(data))
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AllStations);
+)(StationForm);
