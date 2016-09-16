@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
-import StationForm from './stations_form.jsx';
+import DropDown from './dropdown.jsx';
 import {requestAllStations, requestAllStationsStorage, requestRTDForStation} from '../../actions/station_actions.js';
+
 
 const mapStateToProps = (state, ownProps) => {
     return ({
@@ -11,10 +12,9 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
   requestAllStations: (data) => dispatch(requestAllStations(data)),
   requestAllStationsStorage: (data) => dispatch(requestAllStationsStorage(data)),
-  requestRTDForStation: (data) => dispatch(requestRTDForStation(data))
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(StationForm);
+)(DropDown);

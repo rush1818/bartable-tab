@@ -1,5 +1,5 @@
-import { fetchAllStationsAPI, xmlToJson, fetchAllStationsStorage} from './../util/bart_api.js';
-import {STATION_CONSTANTS, receiveAllStations, receiveAllStationsStorage} from '../actions/station_actions.js';
+import { fetchAllStationsAPI, xmlToJson, fetchAllStationsStorage, fetchRTDStationAPI} from './../util/bart_api.js';
+import {STATION_CONSTANTS, receiveAllStations, receiveAllStationsStorage, receiveRTDForStation} from '../actions/station_actions.js';
 
 
 const StationMiddlware = store => next => action => {
@@ -10,6 +10,9 @@ const StationMiddlware = store => next => action => {
       return next(action);
     case STATION_CONSTANTS.REQUEST_ALL_STATIONS_STORAGE:
       fetchAllStationsStorage(data => store.dispatch(receiveAllStationsStorage(data)));
+      return next(action);
+      case STATION_CONSTANTS.REQUEST_RTD_STATION:
+      fetchRTDStationAPI(data => (store.dispatch(receiveRTDForStation(xmlToJson(data)))), action.station);
       return next(action);
     default:
       return next(action);

@@ -50,7 +50,13 @@ export const fetchRouteDataAPI = (success, routeNo) => {
   });
 };
 
-
+export const fetchRTDStationAPI = (success, station) => {
+  $.ajax({
+    url: `http://api.bart.gov/api/etd.aspx?cmd=etd&orig=${station}&key=${bartKey}`,
+    method: 'GET',
+    success
+  });
+};
 
 
 

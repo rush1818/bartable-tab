@@ -1,10 +1,11 @@
 import React from 'react';
-import StationsContainer from './stations_container.jsx';
+import StationsContainer from '../bart/stations_container.jsx';
+import StationInfoContainer from './station_info_container.jsx';
 
-class StationForm extends React.Component {
+class DropDown extends React.Component {
   constructor(props){
     super(props);
-    this.state = {toSelectedStation: "", fromSelectedStation: ""};
+    this.state = {selectedStation: ""};
     this.options = [];
 
     this.handleChange = this.handleChange.bind(this);
@@ -28,8 +29,8 @@ class StationForm extends React.Component {
   }
   render() {
     return (<div>
-      <StationsContainer type='from' handleChange={this.handleChange('fromSelectedStation')} selectedStation={this.state.fromSelectedStation} options={this.options} />
-      <StationsContainer type='to' handleChange={this.handleChange('toSelectedStation')} selectedStation={this.state.toSelectedStation} options={this.options}/>
+      <StationsContainer type='View Station Info' handleChange={this.handleChange('selectedStation')} selectedStation={this.state.selectedStation} options={this.options} />
+      <StationInfoContainer abbr={this.state.selectedStation}/>
       </div>);
   }
 }
@@ -43,4 +44,4 @@ const buildOptions = (obj, stations) => {
   });
 };
 
-export default StationForm;
+export default DropDown;

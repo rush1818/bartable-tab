@@ -85,13 +85,6 @@ class Weather extends React.Component {
 
     navigator.geolocation.getCurrentPosition(success.bind(this), error, options);
   }
-  componentDidMount () {
-    const that = this;
-    this.getStorageWeather((option) => {
-      return option ? that._updateLocation() : that._fetchGeoLocation() ;
-    });
-    // this._fetchGeoLocation();
-  }
 
   _updateLocation(){
     const that = this;
@@ -113,6 +106,15 @@ class Weather extends React.Component {
       that.saveWeather();
     }, 100);
   }
+
+  componentDidMount () {
+    const that = this;
+    this.getStorageWeather((option) => {
+      return option ? that._updateLocation() : that._fetchGeoLocation() ;
+    });
+    // this._fetchGeoLocation();
+  }
+
   componentWillUnmount(){
 
   }
@@ -129,10 +131,10 @@ class Weather extends React.Component {
     let temp, city;
     if (this.state.temperatureK){
       if (this.state.unitsF){
-        temp = (<p onClick={this.handleClick}>Temperature in F: {this.state.temperatureF}
+        temp = (<p onClick={this.handleClick}>Temperature: {`${this.state.temperatureF} °F`}
           </p>);
       } else {
-        temp = (<p onClick={this.handleClick}>Temperature in C: {this.state.temperatureC}
+        temp = (<p onClick={this.handleClick}>Temperature: {`${this.state.temperatureC} °C`}
           </p>);
       }
       city = (<p>City: {this.state.city}
