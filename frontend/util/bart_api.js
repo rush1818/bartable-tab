@@ -17,7 +17,7 @@ export const fetchAllStationsAPI = (success) => {
 
 
 export const fetchAllStationsStorage = success => {
-  chrome.storage.sync.get('allStationsList', (data) => {
+  chrome.storage.local.get('allStationsList', (data) => {
     if (data){
       success(data);
     }
@@ -25,7 +25,8 @@ export const fetchAllStationsStorage = success => {
 };
 
 export const saveAllStationsStorage = (info) => {
-  chrome.storage.sync.set({'allStationsList': info }, function() {
+  debugger
+  chrome.storage.local.set({'allStationsList': info }, function() {
     // Notify that we saved.
     console.log('Stations saved');
   });
@@ -33,7 +34,7 @@ export const saveAllStationsStorage = (info) => {
 
 
 export const xmlToJson = (xml) => {
-
+// https://davidwalsh.name/convert-xml-json
 	// Create the return object
 	let obj = {};
 
