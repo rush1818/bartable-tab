@@ -1,5 +1,4 @@
 import React from 'react';
-import StationList from './station_list.jsx';
 import Select from 'react-select';
 
 class AllStations extends React.Component {

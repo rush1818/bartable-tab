@@ -11,9 +11,7 @@ class DropDown extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
   componentDidMount(){
-    // this.props.requestAllStations();
     this.props.requestAllStationsStorage();
-    // this.props.requestRTDForStation('24TH');
   }
 
   componentDidUpdate(){

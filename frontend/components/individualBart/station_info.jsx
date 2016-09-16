@@ -1,4 +1,5 @@
 import React from 'react';
+import RouteList from './route_list.jsx';
 
 class StationInfo extends React.Component {
 
@@ -16,9 +17,17 @@ class StationInfo extends React.Component {
 
 
   render() {
+    let content = "Info";
+    let allInfo = this.props.realTime;
+    let keys = Object.keys(allInfo);
+    if (keys.length){
+      content = keys.map(key => {
+        return (<RouteList routes={allInfo[key]} name={key} key={key}/>);
+      });
+    }
     return (
       <div>
-      Station info
+      {content}
       </div>
     );
   }
