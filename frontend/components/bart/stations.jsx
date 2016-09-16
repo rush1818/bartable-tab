@@ -1,4 +1,5 @@
 import React from 'react';
+import StationList from './station_list.jsx';
 
 class AllStations extends React.Component {
   constructor(props){
@@ -6,6 +7,7 @@ class AllStations extends React.Component {
   }
   componentDidMount(){
     this.props.requestAllStations();
+    // this.props.requestAllStationsStorage()
   }
   render() {
     let content;
@@ -13,9 +15,7 @@ class AllStations extends React.Component {
       let allLis = Object.keys(this.props.stations).map(key => {
         let currStation = this.props.stations[key];
         return (
-          <li key={currStation.abbr["#text"]}>
-            {currStation.name["#text"]}
-          </li>
+          <StationList currStation={currStation} key={currStation.abbr["#text"]}/>
         );
       });
       content = (

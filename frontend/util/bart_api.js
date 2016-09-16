@@ -16,6 +16,21 @@ export const fetchAllStationsAPI = (success) => {
 };
 
 
+export const fetchAllStationsStorage = success => {
+  chrome.storage.sync.get('allStationsList', (data) => {
+    if (data){
+      success(data);
+    }
+  });
+};
+
+export const saveAllStationsStorage = (info) => {
+  chrome.storage.sync.set({'allStationsList': info }, function() {
+    // Notify that we saved.
+    console.log('Stations saved');
+  });
+};
+
 
 export const xmlToJson = (xml) => {
 
