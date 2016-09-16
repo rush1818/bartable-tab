@@ -1,5 +1,5 @@
 import $ from 'jquery';
-
+const bartKey = 'ZH44-549V-929T-DWE9'
 export const fetchAllStationsAPI = (success) => {
   if (!success){
     success = (data) => {
@@ -10,7 +10,7 @@ export const fetchAllStationsAPI = (success) => {
 
   $.ajax({
     method: 'GET',
-    url: "http://api.bart.gov/api/stn.aspx?cmd=stns&key=ZH44-549V-929T-DWE9",
+    url: `http://api.bart.gov/api/stn.aspx?cmd=stns&key=${bartKey}`,
     success
   });
 };
@@ -30,6 +30,37 @@ export const saveAllStationsStorage = (info) => {
     console.log('Stations saved');
   });
 };
+
+
+
+export const fetchAllRoutesAPI = success => {
+  $.ajax({
+    url: `https://api.bart.gov/api/route.aspx?cmd=routes&key=${bartKey}`,
+    method: 'GET',
+    success
+  });
+};
+
+
+export const fetchRouteDataAPI = (success, routeNo) => {
+  $.ajax({
+    url: `https://api.bart.gov/api/route.aspx?cmd=routeinfo&route=${routeNo}&key=${bartKey}`,
+    method: 'GET',
+    success
+  });
+};
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 export const xmlToJson = (xml) => {
