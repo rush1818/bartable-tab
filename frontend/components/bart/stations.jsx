@@ -1,16 +1,25 @@
 import React from 'react';
 import StationList from './station_list.jsx';
+import Select from 'react-select';
 
 class AllStations extends React.Component {
   constructor(props){
     super(props);
     this.state = {selectedStation: null};
+    this.options = [];
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
   componentDidMount(){
     // this.props.requestAllStations();
     this.props.requestAllStationsStorage();
+  }
+
+  componentDidUpdate(){
+    if (!this.options.length){
+      buildOptions(this.options, this.props.stations);
+    }
   }
 
   handleChange(e){
@@ -24,21 +33,27 @@ class AllStations extends React.Component {
       that.setState({selectedStation: station});
     };
   }
+
+  handleSelect(value) {
+    this.setState({selectedStation: value});
+  }
   render() {
     let content;
-    debugger
     if (Object.keys(this.props.stations).length){
-      let allLis = Object.keys(this.props.stations).map(key => {
-        let currStation = this.props.stations[key];
-        return (
-          <StationList currStation={currStation} key={currStation.abbr["#text"]} handleClick={this.handleClick(currStation.abbr["#text"])} isSelected={this.state.selectedStation}/>
-        );
-      });
+      // let allLis = Object.keys(this.props.stations).map(key => {
+      //   let currStation = this.props.stations[key];
+      //   return (
+      //     <StationList currStation={currStation} key={currStation.abbr["#text"]} handleClick={this.handleClick(currStation.abbr["#text"])} isSelected={this.state.selectedStation}/>
+      //   );
+      // });
+      // content = (
+      //   <ul className='station-list'>
+      //     {allLis}
+      //   </ul>
+      // );
       content = (
-        <ul className='station-list'>
-          {allLis}
-        </ul>
-      );
+        <Select name='stations' placeholder="Select a station" value={this.state.selectedStation} options={this.options} onChange={this.handleSelect}/>
+      )
     } else {
       content = (
         'Stations'
@@ -52,4 +67,12 @@ class AllStations extends React.Component {
   }
 }
 
+const buildOptions = (obj, stations) => {
+  Object.keys(stations).forEach(key => {
+    let currStation = stations[key];
+    let value = currStation.abbr["#text"];
+    let label = currStation.name["#text"];
+    obj.push({value, label});
+  });
+};
 export default AllStations;
