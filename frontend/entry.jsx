@@ -1,8 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app.jsx';
+import {fetchAllStationsAPI} from './util/bart_api.js';
+import configureStore from './store/store.js';
+import Root from './components/root.jsx';
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root');
-  ReactDOM.render(<App />, root);
+  const store = configureStore();
+  window.store = store;
+  ReactDOM.render(<Root store={store} />, root);
+  window.fetchAllStationsAPI = fetchAllStationsAPI;
 });
