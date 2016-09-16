@@ -1,6 +1,6 @@
 import React from 'react';
 import StationsContainer from '../bart/stations_container.jsx';
-import StationInfoContainer from './station_info_container.jsx';
+import RouteInfoContainer from './route_info_container.jsx';
 
 class DropDown extends React.Component {
   constructor(props){
@@ -28,7 +28,7 @@ class DropDown extends React.Component {
   render() {
     return (<div>
       <StationsContainer type='View Station Info' handleChange={this.handleChange('selectedStation')} selectedStation={this.state.selectedStation} options={this.options} />
-      <StationInfoContainer abbr={this.state.selectedStation}/>
+      <RouteInfoContainer abbr={this.state.selectedStation}/>
       </div>);
   }
 }

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import StationInfo from './station_info.jsx';
+import RouteInfo from './route_info.jsx';
 import {requestRTDForStation} from '../../actions/station_actions.js';
 
 const mapStateToProps = (state, ownProps) => {
@@ -16,4 +16,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(StationInfo);
+)(RouteInfo);
