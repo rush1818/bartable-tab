@@ -11,6 +11,8 @@ const StationsReducer = (state = {}, action) => {
       });
       saveAllStationsStorage(merge({}, newState));
       return newState;
+    case STATION_CONSTANTS.RECEIVE_ALL_STATIONS_STORAGE:
+      return merge({} , action.data.allStationsList);
     default:
       return state;
 

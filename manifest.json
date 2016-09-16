@@ -10,7 +10,7 @@
     "default_popup": "popup.html",
     "default_title": "Click here!"
   },
-  "permissions": ["tabs", "storage", "geolocation",
+  "permissions": ["tabs", "storage", "geolocation", "unlimitedStorage",
     "https://ajax.googleapis.com/"
   ],
   "chrome_url_overrides" : {

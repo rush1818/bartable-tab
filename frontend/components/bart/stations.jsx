@@ -6,8 +6,8 @@ class AllStations extends React.Component {
     super(props);
   }
   componentDidMount(){
-    this.props.requestAllStations();
-    // this.props.requestAllStationsStorage()
+    // this.props.requestAllStations();
+    this.props.requestAllStationsStorage()
   }
   render() {
     let content;
