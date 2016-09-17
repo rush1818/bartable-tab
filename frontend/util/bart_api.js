@@ -1,5 +1,7 @@
 import $ from 'jquery';
-const bartKey = 'ZH44-549V-929T-DWE9'
+const bartKey = 'ZH44-549V-929T-DWE9';
+window.$ = $;
+
 export const fetchAllStationsAPI = (success) => {
   if (!success){
     success = (data) => {

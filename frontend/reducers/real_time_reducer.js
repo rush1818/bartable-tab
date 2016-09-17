@@ -6,9 +6,13 @@ const RTDReducer = (state = {}, action) => {
     case STATION_CONSTANTS.RECEIVE_RTD_STATION:
       let newState = {};
       let newData = action.data.root.station.etd;
-      newData.forEach(route => {
-        newState[route.abbreviation['#text']] = route.estimate;
-      });
+      if (newData instanceof Array){
+        newData.forEach(route => {
+          newState[route.abbreviation['#text']] = route.estimate;
+        });
+      } else {
+        newState[newData.abbreviation['#text']] = newData.estimate;
+      }
       return merge({}, newState);
     default:
       return state;
