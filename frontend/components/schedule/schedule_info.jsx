@@ -24,10 +24,10 @@ class ScheduleInfo extends React.Component {
     let content;
     const routes = this.props.schedule[this.props.orig][this.props.dest];
     content = Object.keys(routes).map(id => {
-      return <ScheduleDetail route={routes[id]} />;
+      return <ScheduleDetail route={routes[id]} key={Date.now() + id}/>;
     });
     return(
-      <ul className='all-schedules'>
+      <ul className='all-schedules' key={Date.now()}>
       {content}
       </ul>
     );

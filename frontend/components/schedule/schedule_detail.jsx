@@ -6,7 +6,7 @@ class ScheduleDetail extends React.Component {
     let content;
     content = this.props.route.leg.map(indLeg => {
       return (
-        <li className='schedule-leg' key={indLeg['@attributes'].trainHeadStation + indLeg['@attributes'].origTimeMin}>
+        <li className='schedule-leg' key={indLeg['@attributes'].trainHeadStation + indLeg['@attributes'].origTimeMin + Date.now()}>
         Train: {indLeg['@attributes'].trainHeadStation}  Departs: {indLeg['@attributes'].origTimeMin}
         </li>
       );
