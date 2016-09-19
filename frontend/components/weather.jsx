@@ -1,10 +1,14 @@
 import React from 'react';
 
 
+const minutes = 1000 * 60;
+
+
 class Weather extends React.Component {
   constructor(){
     super();
-    this.state = {temperatureK: null, city: "Location not provided", latitude: 0, longitude: 0, unitsF: true, temperatureF: 'loading', temperatureC: 'loading'};
+    let date = Date.now();
+    this.state = {temperatureK: null, city: "Location not provided", latitude: 0, longitude: 0, unitsF: true, temperatureF: 'loading', temperatureC: 'loading', date};
 
     this._fetchGeoLocation = this._fetchGeoLocation.bind(this);
     this.saveWeather = this.saveWeather.bind(this);
@@ -45,7 +49,7 @@ class Weather extends React.Component {
   }
 
   saveWeather(){
-    chrome.storage.sync.set({'weatherInfo': {temperatureK: this.state.temperatureK, city: this.state.city,  latitude: this.state.latitude, longitude: this.state.longitude, unitsF: this.state.unitsF, temperatureF: this.state.temperatureF, temperatureC: this.state.temperatureC } }, function() {
+    chrome.storage.sync.set({'weatherInfo': {temperatureK: this.state.temperatureK, city: this.state.city,  latitude: this.state.latitude, longitude: this.state.longitude, unitsF: this.state.unitsF, temperatureF: this.state.temperatureF, temperatureC: this.state.temperatureC, date: this.state.date } }, function() {
       // Notify that we saved.
       console.log('Settings saved');
     });
@@ -57,9 +61,13 @@ class Weather extends React.Component {
     chrome.storage.sync.get('weatherInfo', ({weatherInfo}) => {
       if (weatherInfo && weatherInfo.temperatureF && weatherInfo.temperatureC){
         option = true;
+
+        if ( Math.round(Date.now() / minutes) - Math.round(weatherInfo.date / minutes) > 5 ){
+          option = false;
+        }
         that.setState({temperatureK: weatherInfo.temperatureK, temperatureF: weatherInfo.temperatureF, city: weatherInfo.city, temperatureC: weatherInfo.temperatureC, unitsF: weatherInfo.unitsF});
       } else {
-        console.log('not found');
+        console.log('weather not found in storage');
       }
       callback(option);
     });
