@@ -1,5 +1,6 @@
 import React from 'react';
 import StationsContainer from './stations_container.jsx';
+import ScheduleContainer from '../schedule/schedule_container.jsx'
 
 class StationForm extends React.Component {
   constructor(props){
@@ -36,6 +37,11 @@ class StationForm extends React.Component {
   }
   render() {
     let scheduleContent;
+    const schedules = this.props.schedule;
+    const keys = Object.keys(schedules);
+    if (keys.length && schedules[this.state.fromSelectedStation.value][this.state.toSelectedStation.value]){
+      scheduleContent = (<ScheduleContainer orig={this.state.fromSelectedStation.value} dest={this.state.toSelectedStation.value} />);
+    }
     return (<div>
       <StationsContainer type='from' handleChange={this.handleChange('fromSelectedStation')} selectedStation={this.state.fromSelectedStation} options={this.options} />
       <StationsContainer type='to' handleChange={this.handleChange('toSelectedStation')} selectedStation={this.state.toSelectedStation} options={this.options}/>

@@ -64,7 +64,7 @@ export const fetchRTDStationAPI = (success, station) => {
 
 export const fetchRouteScheduleAPI = (success, orig, dest) => {
   $.ajax({
-    url: `http://api.bart.gov/api/sched.aspx?cmd=depart&orig=${orig}&dest=${dest}&date=now&key=${bartKey}`,
+    url: `http://api.bart.gov/api/sched.aspx?cmd=depart&orig=${orig}&dest=${dest}&date=now&b=0&a=4&key=${bartKey}`,
     method: 'GET',
     success
   });

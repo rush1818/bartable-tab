@@ -4,7 +4,8 @@ import {requestAllStations, requestAllStationsStorage, requestRTDForStation, req
 
 const mapStateToProps = (state, ownProps) => {
     return ({
-    stations: state.stations
+    stations: state.stations,
+    schedule: state.schedule
   });
 };
 

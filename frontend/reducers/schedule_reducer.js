@@ -18,9 +18,13 @@ const ScheduleReducer = (state = {}, action) => {
   switch (action.type) {
     case STATION_CONSTANTS.RECEIVE_SCHEDULE:
       let newState = {};
+      let oldState = merge({}, state);
       let newData = action.data.root.schedule.request.trip;
       newState[action.orig] = {};
       newState[action.orig][action.dest] = {};
+      if (oldState[action.orig] && oldState[action.orig][action.dest]){
+        oldState[action.orig][action.dest] = {};
+      }
       newData.forEach((route, id) => {
 
         newState[action.orig][action.dest][id] = route;
@@ -28,7 +32,7 @@ const ScheduleReducer = (state = {}, action) => {
           route.leg = [route.leg];
         }
       });
-      return merge({}, state, newState);
+      return merge({}, oldState, newState);
     default:
       return state;
 
