@@ -1,3 +1,4 @@
+/*globals chrome*/
 import React from 'react';
 import {merge} from 'lodash';
 import StationsContainer from './stations_container.jsx';
@@ -68,14 +69,15 @@ class StationForm extends React.Component {
         console.log('schedule saved');
         that.scheduleContent = null;
         // add callback to fetch stored routes so that they can render and clear the results
-        // that.clearValues()
+        that.clearValues()
       });
-    })
+    });
   }
+  //
   render() {
     const schedules = this.props.schedule;
     const keys = Object.keys(schedules);
-    if (keys.length && schedules[this.state.fromSelectedStation.value][this.state.toSelectedStation.value]){
+    if (this.state.fromSelectedStation !== "" && this.state.toSelectedStation !== "" && keys.length && schedules[this.state.fromSelectedStation.value][this.state.toSelectedStation.value]){
       this.scheduleContent = (
         <div className='schedule-result-box'>
         <span onClick={this.saveRoute}>Save Routes New</span>
