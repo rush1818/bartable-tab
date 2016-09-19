@@ -1,4 +1,5 @@
 import React from 'react';
+import {merge} from 'lodash';
 import StationsContainer from './stations_container.jsx';
 import ScheduleContainer from '../schedule/schedule_container.jsx';
 
@@ -7,9 +8,12 @@ class StationForm extends React.Component {
     super(props);
     this.state = {toSelectedStation: "", fromSelectedStation: ""};
     this.options = [];
+    this.scheduleContent = null;
 
     this.handleChange = this.handleChange.bind(this);
     this.buildSchedule = this.buildSchedule.bind(this);
+    this.clearValues = this.clearValues.bind(this);
+    this.saveRoute = this.saveRoute.bind(this);
   }
   componentWillMount(){
     this.props.requestAllStationsStorage();
@@ -30,7 +34,7 @@ class StationForm extends React.Component {
 
   handleChange(type) {
     return (value) => {
-      this.setState({[type]: value});
+      this.setState({[type]: value, clear: false});
       setTimeout(()=>{
         if (this.state.toSelectedStation !== "" && this.state.fromSelectedStation !== "" && this.state.toSelectedStation !== this.state.fromSelectedStation){
           this.buildSchedule();
@@ -38,17 +42,50 @@ class StationForm extends React.Component {
       }, 100);
     };
   }
+
+  clearValues(){
+    this.setState({toSelectedStation: "", fromSelectedStation: ""});
+  }
+
+  saveRoute(){
+    const that = this;
+    chrome.storage.sync.get('scheduleInfo', data => {
+      console.log(data);
+      let key;
+      if (!Object.keys(data).length){
+        data = {};
+        key = 0;
+      } else {
+        key = Object.keys(data['scheduleInfo']).length;
+        console.log(key);
+      }
+      let saveData = {};
+      saveData[key] = {orig: this.state.fromSelectedStation.value, dest: this.state.toSelectedStation.value};
+      saveData = merge({}, data, {'scheduleInfo': saveData});
+
+      chrome.storage.sync.set(saveData, function() {
+        // Notify that we saved.
+        console.log('schedule saved');
+        that.scheduleContent = null;
+        // add callback to fetch stored routes so that they can render and clear the results
+        // that.clearValues()
+      });
+    })
+  }
   render() {
-    let scheduleContent;
     const schedules = this.props.schedule;
     const keys = Object.keys(schedules);
     if (keys.length && schedules[this.state.fromSelectedStation.value][this.state.toSelectedStation.value]){
-      scheduleContent = (<ScheduleContainer orig={this.state.fromSelectedStation.value} dest={this.state.toSelectedStation.value} />);
+      this.scheduleContent = (
+        <div className='schedule-result-box'>
+        <span onClick={this.saveRoute}>Save Routes New</span>
+        <ScheduleContainer orig={this.state.fromSelectedStation.value} dest={this.state.toSelectedStation.value} />
+        </div>);
     }
     return (<div>
       <StationsContainer type='from' handleChange={this.handleChange('fromSelectedStation')} selectedStation={this.state.fromSelectedStation} options={this.options} />
       <StationsContainer type='to' handleChange={this.handleChange('toSelectedStation')} selectedStation={this.state.toSelectedStation} options={this.options}/>
-      {scheduleContent}
+      {this.scheduleContent}
       </div>);
   }
 }
