@@ -25,6 +25,7 @@ class ScheduleInfo extends React.Component {
     e.preventDefault();
 
     chrome.storage.sync.get('scheduleInfo', data => {
+      console.log(data);
       let key;
       if (!data){
         data = {};
@@ -34,9 +35,9 @@ class ScheduleInfo extends React.Component {
       }
       let saveData = {};
       saveData[key] = {orig: this.props.orig, dest: this.props.dest};
-      saveData = merge({}, data, saveData);
+      saveData = merge({}, data, {'scheduleInfo': saveData});
 
-      chrome.storage.sync.set({'scheduleInfo': saveData }, function() {
+      chrome.storage.sync.set(saveData, function() {
         // Notify that we saved.
         console.log('schedule saved');
         // add callback to fetch stored routes so that they can render
