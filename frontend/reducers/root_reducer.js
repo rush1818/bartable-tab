@@ -7,6 +7,6 @@ export default combineReducers(
   {
     stations: StationsReducer,
     realTime: RTDReducer,
-    schdule: ScheduleReducer
+    schedule: ScheduleReducer
   }
 );
