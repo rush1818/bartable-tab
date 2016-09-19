@@ -1,3 +1,4 @@
+/*globals chrome*/
 import $ from 'jquery';
 const bartKey = 'ZH44-549V-929T-DWE9';
 window.$ = $;
@@ -16,23 +17,6 @@ export const fetchAllStationsAPI = (success) => {
     success
   });
 };
-
-
-export const fetchAllStationsStorage = success => {
-  chrome.storage.local.get('allStationsList', (data) => {
-    if (data){
-      success(data);
-    }
-  });
-};
-
-export const saveAllStationsStorage = (info) => {
-  chrome.storage.local.set({'allStationsList': info }, () => {
-    // Notify that we saved.
-    console.log('Stations saved');
-  });
-};
-
 
 
 export const fetchAllRoutesAPI = success => {
@@ -74,11 +58,35 @@ export const fetchRouteScheduleAPI = (success, orig, dest) => {
 
 
 
+// Chrome APIs
 
 
 
+export const fetchAllStationsStorage = success => {
+  chrome.storage.local.get('allStationsList', (data) => {
+    if (data){
+      success(data);
+    }
+  });
+};
+
+export const saveAllStationsStorage = (info) => {
+  chrome.storage.local.set({'allStationsList': info }, () => {
+    // Notify that we saved.
+    console.log('Stations saved');
+  });
+};
 
 
+export const fetchSavedSchedules = success => {
+  chrome.storage.local.get('scheduleInfo', (data) => {
+    return success(data);
+  });
+};
+
+
+
+// Helpers
 
 export const xmlToJson = (xml) => {
 // https://davidwalsh.name/convert-xml-json
