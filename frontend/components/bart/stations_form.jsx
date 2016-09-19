@@ -8,11 +8,10 @@ class StationForm extends React.Component {
     this.options = [];
 
     this.handleChange = this.handleChange.bind(this);
+    this.buildSchedule = this.buildSchedule.bind(this);
   }
   componentDidMount(){
-    // this.props.requestAllStations();
     this.props.requestAllStationsStorage();
-    // this.props.requestRTDForStation('24TH');
   }
 
   componentDidUpdate(){
@@ -21,15 +20,26 @@ class StationForm extends React.Component {
     }
   }
 
+  buildSchedule() {
+    this.props.requestSchedule(this.state.fromSelectedStation.value, this.state.toSelectedStation.value);
+  }
+
   handleChange(type) {
     return (value) => {
       this.setState({[type]: value});
+      setTimeout(()=>{
+        if (this.state.toSelectedStation !== "" && this.state.fromSelectedStation !== "" && this.state.toSelectedStation !== this.state.fromSelectedStation){
+          this.buildSchedule();
+        }
+      }, 100);
     };
   }
   render() {
+    let scheduleContent;
     return (<div>
       <StationsContainer type='from' handleChange={this.handleChange('fromSelectedStation')} selectedStation={this.state.fromSelectedStation} options={this.options} />
       <StationsContainer type='to' handleChange={this.handleChange('toSelectedStation')} selectedStation={this.state.toSelectedStation} options={this.options}/>
+      {scheduleContent}
       </div>);
   }
 }

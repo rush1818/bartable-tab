@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import StationForm from './stations_form.jsx';
-import {requestAllStations, requestAllStationsStorage, requestRTDForStation} from '../../actions/station_actions.js';
+import {requestAllStations, requestAllStationsStorage, requestRTDForStation, requestSchedule} from '../../actions/station_actions.js';
 
 const mapStateToProps = (state, ownProps) => {
     return ({
@@ -9,9 +9,8 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  requestAllStations: (data) => dispatch(requestAllStations(data)),
   requestAllStationsStorage: (data) => dispatch(requestAllStationsStorage(data)),
-  requestRTDForStation: (data) => dispatch(requestRTDForStation(data))
+  requestSchedule: (orig, dest) => dispatch(requestSchedule(orig, dest))
 });
 
 export default connect(
