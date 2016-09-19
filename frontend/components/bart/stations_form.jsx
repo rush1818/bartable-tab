@@ -1,6 +1,6 @@
 import React from 'react';
 import StationsContainer from './stations_container.jsx';
-import ScheduleContainer from '../schedule/schedule_container.jsx'
+import ScheduleContainer from '../schedule/schedule_container.jsx';
 
 class StationForm extends React.Component {
   constructor(props){
@@ -11,8 +11,11 @@ class StationForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.buildSchedule = this.buildSchedule.bind(this);
   }
-  componentDidMount(){
+  componentWillMount(){
     this.props.requestAllStationsStorage();
+  }
+  componentDidMount(){
+    this.props.requestAllStations();
   }
 
   componentDidUpdate(){

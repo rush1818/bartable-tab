@@ -11,6 +11,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   requestAllStationsStorage: (data) => dispatch(requestAllStationsStorage(data)),
+  requestAllStations: () => dispatch(requestAllStations()),
   requestSchedule: (orig, dest) => dispatch(requestSchedule(orig, dest))
 });
 
