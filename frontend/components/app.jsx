@@ -8,12 +8,16 @@ import Clock from './clock.jsx';
 class App extends React.Component {
   render() {
     return (
-      <div>
-      <h1><Clock /></h1>
-      <h1><Weather /></h1>
-      <h2><StationFormContainer /></h2>
-      <h2><RealTimeDropDownContainer /></h2>
-      <div><SavedScheduleContainer /></div>
+      <div className='app'>
+      <div className='top-grid'>
+        <StationFormContainer />
+        <div className='clock-weather'>
+          <Clock />
+          <Weather />
+        </div>
+        <RealTimeDropDownContainer />
+      </div>
+      <SavedScheduleContainer />
       </div>
     );
   }

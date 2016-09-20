@@ -45,14 +45,25 @@ img {
 
 /*------------*/
 #root {
-
+  padding: 20px;
+  cursor: default;
 }
 .bart-map {
   width: 400px;
 }
 
+.top-grid{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.clock-weather{
+
+}
 .clock{
-font-family: 'Allerta Stencil', sans-serif;
+  /*position: relative;*/
+  /*left: 47%;*/
+  font-family: 'Allerta Stencil', sans-serif;
 }
 
 .clock-time{
@@ -63,6 +74,10 @@ font-family: 'Allerta Stencil', sans-serif;
 
 }
 .weather-info{
+  cursor: pointer;
+  /*position: relative;*/
+  /*left: 47%;*/
+  font-family: 'Allerta Stencil', sans-serif;
 
 }
 .temperature-info{
@@ -76,8 +91,8 @@ font-family: 'Allerta Stencil', sans-serif;
 
 }
 .form-dropdowns{
-  /*display: flex;*/
-  /*flex-direction: row;*/
+  display: flex;
+  flex-direction: row;
 }
 
 .form-dropdowns div{
