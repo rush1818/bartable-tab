@@ -16,10 +16,10 @@ class ScheduleInfo extends React.Component {
   updateSchedule(){
 
     if (firstUpdate){
-      timeOutTime = 0;
+      timeOutTime = 4000;
       firstUpdate = false;
     } else {
-      timeOutTime = 5000;
+      timeOutTime = 4000;
     }
     const that = this;
     window.setTimeout(()=> {
@@ -35,14 +35,15 @@ class ScheduleInfo extends React.Component {
       const routes = this.props.schedule[this.props.orig][this.props.dest];
       content = Object.keys(routes).map(id => {
         return (
-          <span key={Date.now() + this.props.orig + id}>From: {this.props.orig} To: {this.props.dest}
+
           <ScheduleDetail route={routes[id]} key={Date.now() + id}/>
-          </span>
         );
       });
     }
     return(
       <ul className='all-schedules' key={Date.now()}>
+      <span className='saved-from-to' key={Date.now() + this.props.orig}>From: {this.props.orig} To: {this.props.dest}
+      </span>
       {content}
       </ul>
     );
