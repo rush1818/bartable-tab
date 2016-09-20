@@ -44,30 +44,17 @@ img {
 }
 
 /*------------*/
+.weather-info{
+
+}
+.temperature-info{
+
+}
+.city-info{
+
+}
+
+
 ::-webkit-scrollbar {
     display: none;
 }
-
-/*.station-list {
-  position: fixed;
-  list-style: none;
-  margin-top: 40px;
-  height: 400px;
-  width: 200px;
-  overflow: scroll;
-}
-
-.station-list:after {
-  position: fixed;
-  top: 50px;
-  bottom: 0;
-  width: 200px;
-  height: 100%;
-  content: "";
-  background: linear-gradient(to bottom,
-     rgba(255,255,255, 1) 80px,
-     rgba(255,255,255, 0) 200px,
-     rgba(255,255,255, 1) 400px
-  );
-  pointer-events: none; /* so the text is still selectable */
-}*/
