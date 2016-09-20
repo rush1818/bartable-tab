@@ -1,5 +1,5 @@
-import { fetchAllStationsAPI, xmlToJson, fetchAllStationsStorage, fetchRTDStationAPI, fetchRouteScheduleAPI} from './../util/bart_api.js';
-import {STATION_CONSTANTS, receiveAllStations, receiveAllStationsStorage, receiveRTDForStation, receiveSchedule} from '../actions/station_actions.js';
+import { fetchAllStationsAPI, xmlToJson, fetchAllStationsStorage, fetchRTDStationAPI, fetchRouteScheduleAPI, fetchSavedSchedulesStorage} from './../util/bart_api.js';
+import {STATION_CONSTANTS, receiveAllStations, receiveAllStationsStorage, receiveRTDForStation, receiveSchedule, receiveScheduleStorage} from '../actions/station_actions.js';
 
 
 const StationMiddlware = store => next => action => {
@@ -16,6 +16,9 @@ const StationMiddlware = store => next => action => {
       return next(action);
     case STATION_CONSTANTS.REQUEST_SCHEDULE:
       fetchRouteScheduleAPI(data => (store.dispatch(receiveSchedule(action.orig, action.dest, xmlToJson(data)))), action.orig, action.dest);
+      return next(action);
+    case STATION_CONSTANTS.REQUEST_SCHEDULE_STORAGE:
+      fetchSavedSchedulesStorage(data => (store.dispatch(receiveScheduleStorage(data))));
       return next(action);
     default:
       return next(action);

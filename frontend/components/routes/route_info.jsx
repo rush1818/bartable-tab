@@ -6,21 +6,25 @@ class StationInfo extends React.Component {
   constructor(props){
     super(props);
     this.state = {abbr: null};
-    this.abbr = null;
+    // this.abbr = null;
     this._startTimeOuts = this._startTimeOuts.bind(this);
   }
 
   componentWillReceiveProps(newProps){
+    console.log(newProps);
     if (this.state.abbr !== newProps.abbr){
       const that = this;
       if (that.updateTimeout) clearTimeout(that.updateTimeout);
 
       if (newProps.abbr){
         this.props.requestRTDForStation(newProps.abbr);
-        this.abbr = newProps.abbr;
         this.setState({abbr: newProps.abbr});
         this._startTimeOuts();
-      } //in else clear this.props.realTime but having an action which causes reducer to return {}
+      } else if (newProps.abbr === null){
+        this.setState({abbr: null});
+      }
+
+
     }
   }
 
@@ -35,7 +39,6 @@ class StationInfo extends React.Component {
     this.updateTimeout = setTimeout(()=>{
       that.props.requestRTDForStation(that.abbr);
       that._startTimeOuts();
-      console.log('timeout running');
     }, 10000);
   }
 
@@ -43,7 +46,7 @@ class StationInfo extends React.Component {
     let content = "Info";
     let allInfo = this.props.realTime;
     let keys = Object.keys(allInfo);
-    if (keys.length){
+    if (keys.length && this.state.abbr){
       content = keys.map(key => {
         return (<RouteList routes={allInfo[key]} name={key} key={key}/>);
       });

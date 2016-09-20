@@ -9,7 +9,10 @@ export const STATION_CONSTANTS = {
   RECEIVE_RTD_STATION: 'RECEIVE_RTD_STATION',
 
   RECEIVE_SCHEDULE: 'RECEIVE_SCHEDULE',
-  REQUEST_SCHEDULE: 'REQUEST_SCHEDULE'
+  REQUEST_SCHEDULE: 'REQUEST_SCHEDULE',
+
+  REQUEST_SCHEDULE_STORAGE: 'REQUEST_SCHEDULE_STORAGE',
+  RECEIVE_SCHEDULE_STORAGE: 'RECEIVE_SCHEDULE_STORAGE'
 };
 
 export const requestAllStations = () => ({
@@ -54,4 +57,14 @@ export const receiveSchedule = (orig, dest, data) => ({
   data,
   orig,
   dest
+});
+
+
+export const requestScheduleStorage = () => ({
+  type: STATION_CONSTANTS.REQUEST_SCHEDULE_STORAGE
+});
+
+export const receiveScheduleStorage = (data) => ({
+  type: STATION_CONSTANTS.RECEIVE_SCHEDULE_STORAGE,
+  data
 });

@@ -78,7 +78,7 @@ export const saveAllStationsStorage = (info) => {
 };
 
 
-export const fetchSavedSchedules = success => {
+export const fetchSavedSchedulesStorage = success => {
   chrome.storage.local.get('scheduleInfo', (data) => {
     return success(data);
   });
