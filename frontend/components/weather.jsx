@@ -138,15 +138,14 @@ class Weather extends React.Component {
   render (){
     let temp, city;
     if (this.state.temperatureK){
+      city = (<span className='city-info'>{this.state.city}</span>);
       if (this.state.unitsF){
-        temp = (<p className='temperature-info' onClick={this.handleClick}>Temperature: {`${this.state.temperatureF} °F`}
+        temp = (<p className='temperature-info' onClick={this.handleClick}>{`${this.state.temperatureF} °F in ${this.state.city}`}
           </p>);
       } else {
-        temp = (<p className='temperature-info' onClick={this.handleClick}>Temperature: {`${this.state.temperatureC} °C`}
+        temp = (<p className='temperature-info' onClick={this.handleClick}>{`${this.state.temperatureC} °C in ${this.state.city}`}
           </p>);
       }
-      city = (<p className='city-info'>City: {this.state.city}
-        </p>);
     } else {
       temp = "Loading";
       city = 'Loading';
@@ -154,9 +153,7 @@ class Weather extends React.Component {
     return (
 
       <div className='weather-info'>
-        <h1>Weather</h1>
         {temp}
-        {city === 'Loading' ? "" : city}
       </div>
     );
   }
