@@ -64,6 +64,7 @@ img {
   /*position: relative;*/
   /*left: 47%;*/
   font-family: 'Allerta Stencil', sans-serif;
+  text-align: center;
 }
 
 .clock-time{
@@ -107,10 +108,12 @@ img {
 }
 
 .all-schedules{
+  display: inline-block;
 
 }
 
 .single-schedule{
+  border: 1px solid black;
 
 }
 

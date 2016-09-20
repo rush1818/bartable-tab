@@ -81,7 +81,7 @@ class StationForm extends React.Component {
     if (this.state.fromSelectedStation !== "" && this.state.toSelectedStation !== "" && keys.length && schedules[this.state.fromSelectedStation.value][this.state.toSelectedStation.value]){
       this.scheduleContent = (
         <div className='schedule-result-box'>
-        <span onClick={this.saveRoute}>Save Routes New</span>
+        <div onClick={this.saveRoute}>Save Routes New</div>
         <ScheduleContainer orig={this.state.fromSelectedStation.value} dest={this.state.toSelectedStation.value} />
         </div>);
     }
