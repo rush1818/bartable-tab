@@ -22,7 +22,7 @@ class SavedRoutesIndex extends React.Component {
     }
 
     return(
-      <div>
+      <div className='saved-schedules-box'>
       {content}
       </div>
     );

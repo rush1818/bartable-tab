@@ -7,20 +7,17 @@ let timeOutTime;
 class ScheduleInfo extends React.Component {
   constructor(props){
     super(props);
+    this.state = {hidden: true};
     this.updateSchedule = this.updateSchedule.bind(this);
+    this.handleShow = this.handleShow.bind(this);
   }
 
   componentDidMount(){
     this.updateSchedule(firstUpdate);
   }
   updateSchedule(){
+    timeOutTime = timeOutTime && timeOutTime !== 2000 ? 4000 : 2000;
 
-    if (firstUpdate){
-      timeOutTime = 4000;
-      firstUpdate = false;
-    } else {
-      timeOutTime = 4000;
-    }
     const that = this;
     window.setTimeout(()=> {
       console.log('running update');
@@ -29,20 +26,25 @@ class ScheduleInfo extends React.Component {
     }, timeOutTime);
   }
 
+  handleShow(e){
+    e.preventDefault();
+    this.state.hidden ? this.setState({hidden: false}) : this.setState({hidden: true});
+  }
+
   render() {
     let content;
-    if (this.props.schedule && this.props.schedule[this.props.orig] && this.props.schedule[this.props.orig][this.props.dest]){
+    if (!this.state.hidden && this.props.schedule && this.props.schedule[this.props.orig] && this.props.schedule[this.props.orig][this.props.dest]){
       const routes = this.props.schedule[this.props.orig][this.props.dest];
       content = Object.keys(routes).map(id => {
         return (
 
-          <ScheduleDetail route={routes[id]} key={Date.now() + id}/>
+          <ScheduleDetail route={routes[id]} key={Date.now() + id} className='saved-time-results' />
         );
       });
     }
     return(
       <ul className='all-schedules' key={Date.now()}>
-      <span className='saved-from-to' key={Date.now() + this.props.orig}>From: {this.props.orig} To: {this.props.dest}
+      <span className='saved-from-to' key={Date.now() + this.props.orig} onClick={this.handleShow} >From: {this.props.orig} To: {this.props.dest}
       </span>
       {content}
       </ul>

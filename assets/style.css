@@ -58,13 +58,12 @@ img {
   justify-content: space-between;
 }
 .clock-weather{
+  text-align: center;
+  font-family: 'Allerta Stencil', sans-serif;
+  font-size: 26px;
 
 }
 .clock{
-  /*position: relative;*/
-  /*left: 47%;*/
-  font-family: 'Allerta Stencil', sans-serif;
-  text-align: center;
 }
 
 .clock-time{
@@ -76,9 +75,6 @@ img {
 }
 .weather-info{
   cursor: pointer;
-  /*position: relative;*/
-  /*left: 47%;*/
-  font-family: 'Allerta Stencil', sans-serif;
 
 }
 .temperature-info{
@@ -125,6 +121,26 @@ img {
   right: 60px;
 }
 
+
+/*Saved Schedules*/
+.saved-schedules-box{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  overflow-y: auto;
+}
+.all-schedules{
+  margin: 5px 0;
+}
+.saved-from-to{
+  background: red;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 3px 7px;
+  box-sizing: border-box;
+
+}
 
 ::-webkit-scrollbar {
     display: none;

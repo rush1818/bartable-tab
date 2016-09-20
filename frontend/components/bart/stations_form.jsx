@@ -69,7 +69,7 @@ class StationForm extends React.Component {
         console.log('schedule saved');
         that.scheduleContent = null;
         // add callback to fetch stored routes so that they can render and clear the results
-        that.clearValues()
+        that.clearValues();
         that.props.requestScheduleStorage();
       });
     });
