@@ -44,6 +44,24 @@ img {
 }
 
 /*------------*/
+#root {
+
+}
+.bart-map {
+  width: 400px;
+}
+
+.clock{
+font-family: 'Allerta Stencil', sans-serif;
+}
+
+.clock-time{
+
+}
+
+.clock-date{
+
+}
 .weather-info{
 
 }
@@ -54,6 +72,32 @@ img {
 
 }
 
+.station-form{
+
+}
+.form-dropdowns{
+  /*display: flex;*/
+  /*flex-direction: row;*/
+}
+
+.form-dropdowns div{
+  /*width: 500px*/
+}
+.form-results{
+
+}
+
+.schedule-result-box{
+
+}
+
+.all-schedules{
+
+}
+
+.single-schedule{
+
+}
 
 ::-webkit-scrollbar {
     display: none;

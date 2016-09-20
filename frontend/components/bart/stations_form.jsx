@@ -85,10 +85,19 @@ class StationForm extends React.Component {
         <ScheduleContainer orig={this.state.fromSelectedStation.value} dest={this.state.toSelectedStation.value} />
         </div>);
     }
-    return (<div>
-      <StationsContainer type='from' handleChange={this.handleChange('fromSelectedStation')} selectedStation={this.state.fromSelectedStation} options={this.options} />
-      <StationsContainer type='to' handleChange={this.handleChange('toSelectedStation')} selectedStation={this.state.toSelectedStation} options={this.options}/>
-      {this.scheduleContent}
+    return (<div className='station-form'>
+        <h1>View Route Schedule</h1>
+
+        <div className='form-dropdowns'>
+          <StationsContainer type='from' handleChange={this.handleChange('fromSelectedStation')} selectedStation={this.state.fromSelectedStation} options={this.options} />
+
+          <StationsContainer type='to' handleChange={this.handleChange('toSelectedStation')} selectedStation={this.state.toSelectedStation} options={this.options}/>
+        </div>
+
+        <div className='form-results'>
+          {this.scheduleContent}
+        </div>
+
       </div>);
   }
 }

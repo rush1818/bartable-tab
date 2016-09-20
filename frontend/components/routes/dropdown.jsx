@@ -27,6 +27,7 @@ class DropDown extends React.Component {
   }
   render() {
     return (<div>
+      <h1>View Station Schedule</h1>
       <StationsContainer type='View Station Info' handleChange={this.handleChange('selectedStation')} selectedStation={this.state.selectedStation} options={this.options} />
       <RouteInfoContainer abbr={this.state.selectedStation}/>
       </div>);

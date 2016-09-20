@@ -7,10 +7,13 @@ class WidgetClock extends React.Component {
   constructor(){
     super();
     let date = new Date();
+    const newDate = new Date();
+    let currentHours = formatNumber(newDate.getHours());
+    let currentMin = formatNumber(newDate.getMinutes());
+    let currentSeconds = formatNumber(newDate.getSeconds());
 
-    this.state = {date: (new Date())};
-    this.state = { currentHours: this.state.date.getHours(),
-      currentMin: this.state.date.getMinutes(), currentSeconds: this.state.date.getSeconds(), currentDate: this.state.date.toDateString()};
+    this.state = {date: newDate, currentHours ,
+      currentMin, currentSeconds, currentDate: newDate.toDateString()};
   }
 
   componentDidMount (){
@@ -30,12 +33,8 @@ class WidgetClock extends React.Component {
   render(){
     return (
       <div className='clock'>
-        <h1 className='clock-time'> Time:
         <p>{this.state.currentHours} : {this.state.currentMin} : {this.state.currentSeconds}</p>
-        </h1>
-        <h1 className='clock-date'> Date:
-          <p>{this.state.currentDate}</p>
-        </h1>
+        <p>{this.state.currentDate}</p>
       </div>
     );
   }
