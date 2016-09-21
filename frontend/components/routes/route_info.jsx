@@ -6,7 +6,7 @@ class StationInfo extends React.Component {
   constructor(props){
     super(props);
     this.state = {abbr: null};
-    // this.abbr = null;
+    this.abbr = null;
     this._startTimeOuts = this._startTimeOuts.bind(this);
   }
 
@@ -18,8 +18,10 @@ class StationInfo extends React.Component {
       if (newProps.abbr){
         this.props.requestRTDForStation(newProps.abbr);
         this.setState({abbr: newProps.abbr});
+        this.abbr = newProps.abbr;
         this._startTimeOuts();
       } else if (newProps.abbr === null){
+        this.abbr = null;
         this.setState({abbr: null});
       }
 
@@ -36,6 +38,7 @@ class StationInfo extends React.Component {
   _startTimeOuts(){
     const that = this;
     this.updateTimeout = setTimeout(()=>{
+      console.log(that.abbr);
       that.props.requestRTDForStation(that.abbr);
       that._startTimeOuts();
     }, 10000);
