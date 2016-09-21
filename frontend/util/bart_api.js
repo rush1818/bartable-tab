@@ -1,5 +1,6 @@
 /*globals chrome*/
 import $ from 'jquery';
+import {merge} from 'lodash';
 const bartKey = 'ZH44-549V-929T-DWE9';
 window.$ = $;
 
@@ -84,6 +85,21 @@ export const fetchSavedSchedulesStorage = success => {
   });
 };
 
+
+export const removeSavedScheduleStorage = (success, orig, dest) => {
+  chrome.storage.local.get('scheduleInfo', data => {
+    let saveData = merge({}, data);
+    Object.keys(saveData['scheduleInfo']).forEach(key => {
+      let currentSch = saveData['scheduleInfo'][key];
+      if (currentSch.orig === orig && currentSch.dest === dest){
+        delete saveData['scheduleInfo'][key];
+      }
+    });
+    chrome.storage.local.set(saveData, function() {
+      success();
+    });
+  });
+};
 
 
 // Helpers

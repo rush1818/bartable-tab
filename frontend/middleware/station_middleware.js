@@ -1,4 +1,4 @@
-import { fetchAllStationsAPI, xmlToJson, fetchAllStationsStorage, fetchRTDStationAPI, fetchRouteScheduleAPI, fetchSavedSchedulesStorage} from './../util/bart_api.js';
+import { fetchAllStationsAPI, xmlToJson, fetchAllStationsStorage, fetchRTDStationAPI, fetchRouteScheduleAPI, fetchSavedSchedulesStorage, removeSavedScheduleStorage} from './../util/bart_api.js';
 import {STATION_CONSTANTS, receiveAllStations, receiveAllStationsStorage, receiveRTDForStation, receiveSchedule, receiveScheduleStorage} from '../actions/station_actions.js';
 
 
@@ -20,6 +20,9 @@ const StationMiddlware = store => next => action => {
     case STATION_CONSTANTS.REQUEST_SCHEDULE_STORAGE:
       fetchSavedSchedulesStorage(data => (store.dispatch(receiveScheduleStorage(data))));
       return next(action);
+    case STATION_CONSTANTS.REMOVE_SAVED_SCHEDULE:
+      let success = () => (next(action));
+      return removeSavedScheduleStorage(success, action.orig, action.dest);
     default:
       return next(action);
   }
