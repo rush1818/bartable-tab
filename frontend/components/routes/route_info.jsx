@@ -30,7 +30,7 @@ class StationInfo extends React.Component {
   }
 
   componentWillUnmount(){
-    console.log('unmount');
+    // console.log('unmount');
     const that = this;
     if (that.updateTimeout) clearTimeout(that.updateTimeout);
   }
@@ -38,7 +38,7 @@ class StationInfo extends React.Component {
   _startTimeOuts(){
     const that = this;
     this.updateTimeout = setTimeout(()=>{
-      console.log(that.abbr);
+      // console.log(that.abbr);
       that.props.requestRTDForStation(that.abbr);
       that._startTimeOuts();
     }, 10000);

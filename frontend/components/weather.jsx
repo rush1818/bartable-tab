@@ -51,7 +51,7 @@ class Weather extends React.Component {
   saveWeather(){
     chrome.storage.sync.set({'weatherInfo': {temperatureK: this.state.temperatureK, city: this.state.city,  latitude: this.state.latitude, longitude: this.state.longitude, unitsF: this.state.unitsF, temperatureF: this.state.temperatureF, temperatureC: this.state.temperatureC, date: this.state.date } }, function() {
       // Notify that we saved.
-      console.log('Settings saved');
+      // console.log('Settings saved');
     });
   }
 
@@ -67,7 +67,7 @@ class Weather extends React.Component {
         }
         that.setState({temperatureK: weatherInfo.temperatureK, temperatureF: weatherInfo.temperatureF, city: weatherInfo.city, temperatureC: weatherInfo.temperatureC, unitsF: weatherInfo.unitsF});
       } else {
-        console.log('weather not found in storage');
+        // console.log('weather not found in storage');
       }
       callback(option);
     });

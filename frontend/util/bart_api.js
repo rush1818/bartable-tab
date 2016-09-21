@@ -74,7 +74,7 @@ export const fetchAllStationsStorage = success => {
 export const saveAllStationsStorage = (info) => {
   chrome.storage.local.set({'allStationsList': info }, () => {
     // Notify that we saved.
-    console.log('Stations saved');
+    // console.log('Stations saved');
   });
 };
 
