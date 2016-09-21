@@ -18,9 +18,13 @@ class RouteList extends React.Component {
   render() {
     let content;
     let currRoute = this.props.routes;
-    content = currRoute.map(route => {
-      return this.renderInfo(route);
-    });
+    if (this.props.routes instanceof Array){
+      content = currRoute.map(route => {
+        return this.renderInfo(route);
+      });
+    } else if (this.props.routes){
+      content = this.renderInfo(this.props.routes);
+    }
     return (
       <ul className='route-list-ul'>
       {content}
