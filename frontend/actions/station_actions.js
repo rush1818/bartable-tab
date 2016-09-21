@@ -12,7 +12,9 @@ export const STATION_CONSTANTS = {
   REQUEST_SCHEDULE: 'REQUEST_SCHEDULE',
 
   REQUEST_SCHEDULE_STORAGE: 'REQUEST_SCHEDULE_STORAGE',
-  RECEIVE_SCHEDULE_STORAGE: 'RECEIVE_SCHEDULE_STORAGE'
+  RECEIVE_SCHEDULE_STORAGE: 'RECEIVE_SCHEDULE_STORAGE',
+
+  REMOVE_SAVED_SCHEDULE: 'REMOVE_SAVED_SCHEDULE'
 };
 
 export const requestAllStations = () => ({
@@ -67,4 +69,10 @@ export const requestScheduleStorage = () => ({
 export const receiveScheduleStorage = (data) => ({
   type: STATION_CONSTANTS.RECEIVE_SCHEDULE_STORAGE,
   data
+});
+
+export const removeSavedSchedule = (orig, dest) => ({
+  type: STATION_CONSTANTS.REMOVE_SAVED_SCHEDULE,
+  orig,
+  dest
 });

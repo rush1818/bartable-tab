@@ -10,6 +10,7 @@ class ScheduleInfo extends React.Component {
     this.state = {hidden: true};
     this.updateSchedule = this.updateSchedule.bind(this);
     this.handleShow = this.handleShow.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount(){
@@ -30,6 +31,11 @@ class ScheduleInfo extends React.Component {
     this.state.hidden ? this.setState({hidden: false}) : this.setState({hidden: true});
   }
 
+  handleDelete(e){
+    e.preventDefault();
+    this.props.removeSavedSchedule(this.props.orig, this.props.dest);
+  }
+
   render() {
     let content;
     if (!this.state.hidden && this.props.schedule && this.props.schedule[this.props.orig] && this.props.schedule[this.props.orig][this.props.dest]){
@@ -41,10 +47,17 @@ class ScheduleInfo extends React.Component {
         );
       });
     }
+    let mainTitle;
+    if (this.props.deletable){
+      mainTitle = (<span className='saved-from-to' key={Date.now() + this.props.orig} onClick={this.handleShow} >From: {this.props.orig} To: {this.props.dest} <i className="material-icons delete-icon" onClick={this.handleDelete}>clear</i>
+      </span>);
+    } else {
+      mainTitle = (<span className='saved-from-to' key={Date.now() + this.props.orig} onClick={this.handleShow} >From: {this.props.orig} To: {this.props.dest}
+      </span>);
+    }
     return(
       <ul className='all-schedules' key={Date.now()}>
-      <span className='saved-from-to' key={Date.now() + this.props.orig} onClick={this.handleShow} >From: {this.props.orig} To: {this.props.dest}
-      </span>
+      {mainTitle}
       {content}
       </ul>
     );

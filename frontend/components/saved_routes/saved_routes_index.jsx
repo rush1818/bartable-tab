@@ -17,7 +17,7 @@ class SavedRoutesIndex extends React.Component {
       content = keys.map(key => {
         let orig = this.props.savedSchedule[key].orig;
         let dest = this.props.savedSchedule[key].dest;
-        return <ScheduleContainer orig={orig} dest={dest} key={key + orig + dest}/>;
+        return <ScheduleContainer orig={orig} dest={dest} key={key + orig + dest} deletable={true}/>;
       });
     }
 
