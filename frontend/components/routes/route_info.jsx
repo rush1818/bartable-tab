@@ -56,7 +56,7 @@ class StationInfo extends React.Component {
       content = "";
     }
     return (
-      <div>
+      <div className='route-list-div'>
       {content}
       </div>
     );

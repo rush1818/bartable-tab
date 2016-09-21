@@ -119,15 +119,6 @@ img {
 
 }
 
-/*Top right corner*/
-.station-schedule{
-
-}
-.station-schedule .Select-menu-outer {
-  right: 60px;
-}
-
-
 /*Saved Schedules*/
 .saved-schedules-box{
   margin-top: 20px;
@@ -138,12 +129,12 @@ img {
   display: inline-flex;
   left: 76%;
   position: relative;
-  width: 200px;
+  width: 295px;
 }
 .all-schedules{
   margin: 5px 0;
-  width: 200px;
-  max-width: 200px;
+  width: 295px;
+  max-width: 295px;
   background: red;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -151,7 +142,11 @@ img {
   box-sizing: border-box;
 }
 .saved-from-to{
+  cursor: pointer;
   font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;;
 }
 
 .saved-from-to .material-icons {
@@ -161,6 +156,25 @@ img {
 }
 .saved-from-to .material-icons:hover {
   color: black;
+}
+/*Top right corner*/
+.station-schedule{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.station-schedule .Select-menu-outer {
+  right: 0px;
+}
+
+.route-list-div{
+  height: 200px;
+  overflow-y: auto;
+}
+
+.route-list-ul{
+  border: 1px solid black;
+
 }
 ::-webkit-scrollbar {
     /*display: none;*/

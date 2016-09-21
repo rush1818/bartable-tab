@@ -14,7 +14,7 @@ class RouteList extends React.Component {
     );
     return content;
   }
-  
+
   render() {
     let content;
     let currRoute = this.props.routes;
@@ -22,7 +22,7 @@ class RouteList extends React.Component {
       return this.renderInfo(route);
     });
     return (
-      <ul>
+      <ul className='route-list-ul'>
       {content}
       </ul>
     );
