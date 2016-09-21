@@ -15,6 +15,7 @@ class StationForm extends React.Component {
     this.buildSchedule = this.buildSchedule.bind(this);
     this.clearValues = this.clearValues.bind(this);
     this.saveRoute = this.saveRoute.bind(this);
+    this.checkValidCondition = this.checkValidCondition.bind(this);
   }
   componentWillMount(){
     this.props.requestAllStationsStorage();
@@ -30,18 +31,35 @@ class StationForm extends React.Component {
   }
 
   buildSchedule() {
+    console.log('build schedule');
     this.props.requestSchedule(this.state.fromSelectedStation.value, this.state.toSelectedStation.value);
   }
 
   handleChange(type) {
+    const that = this;
     return (value) => {
-      this.setState({[type]: value, clear: false});
+      that.setState({[type]: value}, () => {
+        // console.log(this.state);
+        // if (that.checkValidCondition()){
+        //   that.buildSchedule();
+        // } else {
+        //   this.scheduleContent = null;
+        // }
+      });
+
       setTimeout(()=>{
-        if (this.state.toSelectedStation !== "" && this.state.fromSelectedStation !== "" && this.state.toSelectedStation !== this.state.fromSelectedStation){
-          this.buildSchedule();
+        if (that.checkValidCondition()){
+          that.buildSchedule();
+        } else {
+          this.scheduleContent = null;
         }
       }, 100);
     };
+  }
+
+  checkValidCondition(){
+    const that = this;
+    return that.state.fromSelectedStation && that.state.toSelectedStation && that.state.toSelectedStation !== "" && that.state.fromSelectedStation !== "" && that.state.toSelectedStation !== that.state.fromSelectedStation;
   }
 
   clearValues(){
@@ -78,7 +96,7 @@ class StationForm extends React.Component {
   render() {
     const schedules = this.props.schedule;
     const keys = Object.keys(schedules);
-    if (this.state.fromSelectedStation !== "" && this.state.toSelectedStation !== "" && keys.length && schedules[this.state.fromSelectedStation.value][this.state.toSelectedStation.value]){
+    if (this.state.fromSelectedStation && this.state.toSelectedStation && this.state.fromSelectedStation !== "" && this.state.toSelectedStation !== "" && keys.length && schedules[this.state.fromSelectedStation.value][this.state.toSelectedStation.value]){
       this.scheduleContent = (
         <div className='schedule-result-box'>
         <div onClick={this.saveRoute}>Save Routes New</div>
