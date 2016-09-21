@@ -31,29 +31,22 @@ class StationForm extends React.Component {
   }
 
   buildSchedule() {
-    console.log('build schedule');
     this.props.requestSchedule(this.state.fromSelectedStation.value, this.state.toSelectedStation.value);
   }
 
   handleChange(type) {
     const that = this;
     return (value) => {
-      that.setState({[type]: value}, () => {
-        // console.log(this.state);
-        // if (that.checkValidCondition()){
-        //   that.buildSchedule();
-        // } else {
-        //   this.scheduleContent = null;
-        // }
-      });
+      that.setState({[type]: value});
 
-      setTimeout(()=>{
+      const myInterval = setInterval(()=>{
         if (that.checkValidCondition()){
+          window.clearInterval(myInterval);
           that.buildSchedule();
         } else {
           this.scheduleContent = null;
         }
-      }, 100);
+      }, 10);
     };
   }
 
@@ -69,14 +62,12 @@ class StationForm extends React.Component {
   saveRoute(){
     const that = this;
     chrome.storage.local.get('scheduleInfo', data => {
-      console.log(data);
       let key;
       if (!Object.keys(data).length){
         data = {};
         key = 0;
       } else {
         key = Object.keys(data['scheduleInfo']).length;
-        console.log(key);
       }
       let saveData = {};
       saveData[key] = {orig: this.state.fromSelectedStation.value, dest: this.state.toSelectedStation.value};
@@ -84,7 +75,6 @@ class StationForm extends React.Component {
 
       chrome.storage.local.set(saveData, function() {
         // Notify that we saved.
-        console.log('schedule saved');
         that.scheduleContent = null;
         // add callback to fetch stored routes so that they can render and clear the results
         that.clearValues();
