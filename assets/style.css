@@ -67,7 +67,9 @@ img {
   text-align: center;
   font-family: 'Allerta Stencil', sans-serif;
   font-size: 26px;
-
+  position: relative;
+  left: 4%;
+  right: 4%;
 }
 .clock{
 }
@@ -162,6 +164,7 @@ img {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  width: 325px;
 }
 .station-schedule .Select-menu-outer {
   right: 0px;
@@ -170,10 +173,16 @@ img {
 .route-list-div{
   height: 200px;
   overflow-y: auto;
+  box-shadow: 2px 2px #ccc;
 }
 
 .route-list-ul{
-  border: 1px solid black;
+  /*border: 1px solid black;*/
+  box-shadow: 1px 1px #bbb;
+  border-top: 1px solid #bbb;
+  border-left: 1px solid #bbb;
+  padding: 2px 5px;
+  box-sizing: border-box;
 
 }
 ::-webkit-scrollbar {
