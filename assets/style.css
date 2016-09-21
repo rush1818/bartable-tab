@@ -50,6 +50,9 @@ img {
 }
 .bart-map {
   width: 400px;
+  position: absolute;
+  top: 25%;
+  left: 25%;
 }
 
 .top-grid{
@@ -129,19 +132,25 @@ img {
   flex-direction: column;
   max-height: 500px;
   overflow-y: auto;
+  display: inline-flex;
+  left: 76%;
+  position: relative;
+  width: 200px;
 }
 .all-schedules{
   margin: 5px 0;
-}
-.saved-from-to{
+  width: 200px;
+  max-width: 200px;
   background: red;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 3px 7px;
   box-sizing: border-box;
-
+}
+.saved-from-to{
+  font-size: 14px;
 }
 
 ::-webkit-scrollbar {
-    display: none;
+    /*display: none;*/
 }
