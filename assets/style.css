@@ -51,8 +51,11 @@ img {
 .bart-map {
   width: 400px;
   position: absolute;
-  top: 25%;
-  left: 25%;
+  top: 160px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
 }
 
 .top-grid{
