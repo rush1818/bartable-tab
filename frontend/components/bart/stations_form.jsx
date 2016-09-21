@@ -90,7 +90,7 @@ class StationForm extends React.Component {
       this.scheduleContent = (
         <div className='schedule-result-box'>
         <div onClick={this.saveRoute}>Save Routes New</div>
-        <ScheduleContainer orig={this.state.fromSelectedStation.value} dest={this.state.toSelectedStation.value} />
+        <ScheduleContainer orig={this.state.fromSelectedStation.value} dest={this.state.toSelectedStation.value} hidden={'show'}/>
         </div>);
     }
     return (<div className='station-form'>

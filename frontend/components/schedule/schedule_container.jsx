@@ -7,7 +7,8 @@ const mapStateToProps = (state, ownProps) => {
     orig: ownProps.orig,
     dest: ownProps.dest,
     schedule: state.schedule,
-    deletable: ownProps.deletable
+    deletable: ownProps.deletable,
+    hidden: ownProps.hidden ? 'display' : false
   });
 };
 

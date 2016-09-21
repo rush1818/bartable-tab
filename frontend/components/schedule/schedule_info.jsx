@@ -7,7 +7,7 @@ let timeOutTime;
 class ScheduleInfo extends React.Component {
   constructor(props){
     super(props);
-    this.state = {hidden: true};
+    this.state = this.props.hidden ? {hidden: false} : {hidden: true};  //reverse logic
     this.updateSchedule = this.updateSchedule.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
