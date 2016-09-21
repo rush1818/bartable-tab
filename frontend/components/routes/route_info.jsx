@@ -11,7 +11,6 @@ class StationInfo extends React.Component {
   }
 
   componentWillReceiveProps(newProps){
-    console.log(newProps);
     if (this.state.abbr !== newProps.abbr){
       const that = this;
       if (that.updateTimeout) clearTimeout(that.updateTimeout);

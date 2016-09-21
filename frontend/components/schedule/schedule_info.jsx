@@ -20,7 +20,6 @@ class ScheduleInfo extends React.Component {
 
     const that = this;
     window.setTimeout(()=> {
-      console.log('running update');
       that.props.requestSchedule();
       that.updateSchedule();
     }, timeOutTime);
