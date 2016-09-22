@@ -17,7 +17,7 @@ class AllStations extends React.Component {
       );
     }
     return (
-      <div>
+      <div className='dropdown-for-stations'>
       {content}
       </div>
     );
