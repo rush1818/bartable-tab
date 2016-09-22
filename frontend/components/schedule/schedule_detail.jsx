@@ -5,11 +5,11 @@ class ScheduleDetail extends React.Component {
   render() {
     let content;
     let legs = this.props.route.leg;
-    let multiple = legs.length > 1 ? true : false
+    let multiple = legs.length > 1 ? true : false ;
     let msg;
     content = this.props.route.leg.map((indLeg, idx) => {
       if (multiple){
-        msg = idx === (legs.length-1) ? "" : ", transfer to"
+        msg = idx === (legs.length-1) ? "" : ", transfer to" ;
       }
       return (
         <li className='schedule-leg' key={indLeg['@attributes'].trainHeadStation + indLeg['@attributes'].origTimeMin + Date.now()}>
