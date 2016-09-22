@@ -147,7 +147,7 @@ class Weather extends React.Component {
           </p>);
       }
     } else {
-      temp = "Loading";
+      temp = <i className="material-icons">location_searching</i>;
       city = 'Loading';
     }
     return (
