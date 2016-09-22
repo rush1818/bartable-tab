@@ -160,10 +160,12 @@ body {
   max-height: 500px;
   overflow-y: auto;
   display: inline-flex;
-  /*left: 76%;*/
-  /*position: relative;*/
+  /* left: 76%; */
+  position: absolute;
   width: 295px;
   float: right;
+  top: 310px;
+  right: 20px;
 }
 .all-schedules{
   margin: 5px 0;

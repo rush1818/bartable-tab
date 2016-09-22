@@ -3,14 +3,16 @@ import React from 'react';
 import {merge} from 'lodash';
 import StationsContainer from './stations_container.jsx';
 import ScheduleContainer from '../schedule/schedule_container.jsx';
+import onClickOutside from 'react-onclickoutside';
 
 class StationForm extends React.Component {
   constructor(props){
     super(props);
-    this.state = {toSelectedStation: "", fromSelectedStation: ""};
+    this.state = {toSelectedStation: "", fromSelectedStation: "", hidden: false};
     this.options = [];
     this.scheduleContent = null;
 
+    this.handleClickOutside = this.handleClickOutside.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.buildSchedule = this.buildSchedule.bind(this);
     this.clearValues = this.clearValues.bind(this);
@@ -34,10 +36,14 @@ class StationForm extends React.Component {
     this.props.requestSchedule(this.state.fromSelectedStation.value, this.state.toSelectedStation.value);
   }
 
+  handleClickOutside(e){
+    this.setState({hidden: true});
+  }
+
   handleChange(type) {
     const that = this;
     return (value) => {
-      that.setState({[type]: value});
+      that.setState({[type]: value, hidden: false});
 
       const myInterval = setInterval(()=>{
         if (that.checkValidCondition()){
@@ -87,7 +93,7 @@ class StationForm extends React.Component {
     const schedules = this.props.schedule;
     const keys = Object.keys(schedules);
     if (this.state.fromSelectedStation && this.state.toSelectedStation && this.state.fromSelectedStation !== "" && this.state.toSelectedStation !== "" && keys.length && schedules[this.state.fromSelectedStation.value][this.state.toSelectedStation.value]){
-      this.scheduleContent = (
+      this.scheduleContent = this.state.hidden ? "" : (
         <div className='schedule-result-box'>
         <div onClick={this.saveRoute} className='save-route-button'>Save Route</div>
         <ScheduleContainer orig={this.state.fromSelectedStation.value} dest={this.state.toSelectedStation.value} hidden={'show'}/>
@@ -119,4 +125,4 @@ const buildOptions = (obj, stations) => {
   });
 };
 
-export default StationForm;
+export default onClickOutside(StationForm);
