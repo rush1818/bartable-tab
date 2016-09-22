@@ -9,7 +9,7 @@ class RouteList extends React.Component {
     // debugger
     content = (
       <li key={`${name}${minutes['#text']}`}>
-        <span>Train: {name}, ETD: {minutes['#text']}, Platform: {platform['#text']}, Cars: {length['#text']}</span>
+        <span><i className="material-icons train-icon">directions_railway</i> {name}, <i className="material-icons timer-icon">timer</i> {minutes['#text']}, Platform: {platform['#text']}, Cars: {length['#text']}</span>
       </li>
     );
     return content;

@@ -50,6 +50,7 @@ body {
   background-repeat: no-repeat;
   /*text-shadow:  1px 1px #ccc;*/
   font-weight: bold;
+  color: white;
 }
 
 #root {
@@ -119,7 +120,19 @@ body {
 .schedule-result-box{
 
 }
-
+.save-route-button{
+  border: 1px solid white;
+  background: blue;
+  padding: 2px 5px;
+  width: 100px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  position: absolute;
+  /* right: 50%; */
+  /* float: right; */
+  left: 318px;
+  top: 115px;
+}
 .all-schedules{
   display: inline-block;
 
@@ -138,15 +151,16 @@ body {
   max-height: 500px;
   overflow-y: auto;
   display: inline-flex;
-  left: 76%;
-  position: relative;
+  /*left: 76%;*/
+  /*position: relative;*/
   width: 295px;
+  float: right;
 }
 .all-schedules{
   margin: 5px 0;
   width: 295px;
   max-width: 295px;
-  background: red;
+  background: black;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 3px 7px;
@@ -192,7 +206,13 @@ body {
   border-left: 1px solid #bbb;
   padding: 2px 5px;
   box-sizing: border-box;
+  font-weight: normal;
+  font-size: 16px;
 
+}
+
+.route-list-ul .material-icons {
+  font-size: 14px;
 }
 ::-webkit-scrollbar {
     /*display: none;*/
