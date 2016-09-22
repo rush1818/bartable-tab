@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "Getting started example",
+  "name": "Bartable-Tab",
   "description": "This extension allows to view Bart map/schedules on the new tab page",
   "version": "0.1",
   "permissions": ["tabs", "storage", "geolocation", "unlimitedStorage"
