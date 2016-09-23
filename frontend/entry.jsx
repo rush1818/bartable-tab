@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {fetchAllStationsAPI} from './util/bart_api.js';
 import configureStore from './store/store.js';
 import Root from './components/root.jsx';
+import $ from 'jquery';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,4 +12,5 @@ document.addEventListener('DOMContentLoaded', () => {
   window.store = store;
   ReactDOM.render(<Root store={store} />, root);
   window.fetchAllStationsAPI = fetchAllStationsAPI;
+  window.$ = $;
 });

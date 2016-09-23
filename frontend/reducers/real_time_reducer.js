@@ -5,13 +5,18 @@ const RTDReducer = (state = {}, action) => {
   switch (action.type) {
     case STATION_CONSTANTS.RECEIVE_RTD_STATION:
       let newState = {};
-      let newData = action.data.root.station.etd;
-      if (newData instanceof Array){
-        newData.forEach(route => {
-          newState[route.abbreviation['#text']] = route.estimate;
-        });
+      let newData;
+      if (action.data.root.station.etd){  //handle OAK Airport data format
+        newData = action.data.root.station.etd;
+        if (newData instanceof Array){
+          newData.forEach(route => {
+            newState[route.abbreviation['#text']] = route.estimate;
+          });
+        } else {
+          newState[newData.abbreviation['#text']] = newData.estimate;
+        }
       } else {
-        newState[newData.abbreviation['#text']] = newData.estimate;
+        console.log('No real-time data for station');
       }
       return merge({}, newState);
     default:

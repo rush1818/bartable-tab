@@ -39,7 +39,9 @@ const buildOptions = (obj, stations) => {
     let currStation = stations[key];
     let value = currStation.abbr["#text"];
     let label = currStation.name["#text"];
-    obj.push({value, label});
+    if (value !== 'OAKL'){
+      obj.push({value, label});
+    }
   });
 };
 
