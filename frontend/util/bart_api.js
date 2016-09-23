@@ -89,12 +89,14 @@ export const fetchSavedSchedulesStorage = success => {
 export const removeSavedScheduleStorage = (success, orig, dest) => {
   chrome.storage.local.get('scheduleInfo', data => {
     let saveData = merge({}, data);
+    console.log(saveData);
     Object.keys(saveData['scheduleInfo']).forEach(key => {
       let currentSch = saveData['scheduleInfo'][key];
       if (currentSch.orig === orig && currentSch.dest === dest){
         delete saveData['scheduleInfo'][key];
       }
     });
+    console.log(saveData);
     chrome.storage.local.set(saveData, function() {
       success();
     });
