@@ -68,8 +68,6 @@ class StationForm extends React.Component {
   saveRoute(){
     const that = this;
     chrome.storage.local.get('scheduleInfo', data => {
-      console.log('save route action');
-      console.log(data);
       let key;
       if (!Object.keys(data).length){
         data = {};
@@ -83,11 +81,8 @@ class StationForm extends React.Component {
       let saveData = {};
       saveData[key] = {orig: this.state.fromSelectedStation.value, dest: this.state.toSelectedStation.value};
       saveData = merge({}, data, {'scheduleInfo': saveData});
-      console.log(saveData);
       chrome.storage.local.set(saveData, function() {
-        // Notify that we saved.
         that.scheduleContent = null;
-        // add callback to fetch stored routes so that they can render and clear the results
         that.clearValues();
         that.props.requestScheduleStorage();
       });

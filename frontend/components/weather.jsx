@@ -120,7 +120,6 @@ class Weather extends React.Component {
     this.getStorageWeather((option) => {
       return option ? that._updateLocation() : that._fetchGeoLocation() ;
     });
-    // this._fetchGeoLocation();
   }
 
   componentWillUnmount(){
