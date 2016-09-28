@@ -3,7 +3,7 @@
 
   "name": "Bartable-Tab",
   "description": "This extension allows you to view Bart map/schedules on the new tab page.",
-  "version": "1.0",
+  "version": "1.1",
   "permissions": ["tabs", "storage", "geolocation", "unlimitedStorage"
   ],
   "chrome_url_overrides" : {
