@@ -45,14 +45,20 @@ img {
 
 /*------------*/
 body {
-  background-image: url('./background.jpg');
-  background-size: 100%;
-  background-repeat: no-repeat;
   /*text-shadow:  1px 1px #ccc;*/
   font-weight: bold;
   color: white;
   font-size: 14px;
+}
 
+#bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -9999;
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
 }
 
 #root {
